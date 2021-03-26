@@ -1,0 +1,2615 @@
+using ProxyCollect.Model.QTFTDB;
+using ProxyCollect.Tool;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ProxyCollect.Prod
+{
+    public static class YCTJProd
+    {
+        public static void YC(WeightFinalALLProd weightFinal, List<WeightFinalTJProd> tjList, List<WeightFinalALLProd> matchWeightFinalALL, string hostResult = "", string guestResult = "")
+        {
+            foreach (var item in tjList.Where(a => a.gameType == weightFinal.AMgameType && a.prodType == weightFinal.prodType).ToList())
+            {
+                if (!string.IsNullOrEmpty(item.condition2))
+                {
+                    Expression<Func<WeightFinalALLProd, bool>> glambda = x => 1 == 1;
+                    if (!string.IsNullOrEmpty(item.condition0))
+                    {
+                        List<string> condition0 = item.condition0.Replace("and", "$").Split('$').ToList();
+                        List<int> conditionPP = new List<int>();
+                        string gameTypes = item.condition0;
+                        #region 类型
+                        if (gameTypes.Contains($"[gameType]='{weightFinal.gameType}'") && !string.IsNullOrEmpty(weightFinal.gameType))
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalstrProd(glambda, "gameType", weightFinal.gameType, false, true);
+                            conditionPP.Add(1);
+                        }
+                        else if (gameTypes.Contains($"[gameType]!='{weightFinal.gameType}'") && !string.IsNullOrEmpty(weightFinal.gameType))
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalstrProd(glambda, "gameType", weightFinal.gameType, false, false);
+                            conditionPP.Add(1);
+                        }
+                        else if (string.IsNullOrEmpty(weightFinal.gameType))
+                        {
+                            if (gameTypes.Contains($"[gameType] is null"))
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalstrProd(glambda, "gameType", string.Empty, true, true);
+                                conditionPP.Add(1);
+                            }
+                            if (gameTypes.Contains($"[gameType] is not null"))
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalstrProd(glambda, "gameType", string.Empty, false, true);
+                                conditionPP.Add(1);
+                            }
+                        }
+                        if (gameTypes.Contains($"[AMgameType]='{weightFinal.AMgameType}'") && !string.IsNullOrEmpty(weightFinal.AMgameType))
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalstrProd(glambda, "AMgameType", weightFinal.AMgameType, false, true);
+                            conditionPP.Add(1);
+                        }
+                        else if (gameTypes.Contains($"[AMgameType]!='{weightFinal.AMgameType}'") && !string.IsNullOrEmpty(weightFinal.AMgameType))
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalstrProd(glambda, "AMgameType", weightFinal.AMgameType, false, false);
+                            conditionPP.Add(1);
+                        }
+                        else if (string.IsNullOrEmpty(weightFinal.AMgameType))
+                        {
+                            if (gameTypes.Contains($"[AMgameType] is null"))
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalstrProd(glambda, "AMgameType", string.Empty, true, true);
+                                conditionPP.Add(1);
+                            }
+                            if (gameTypes.Contains($"[AMgameType] is not null"))
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalstrProd(glambda, "AMgameType", string.Empty, false, true);
+                                conditionPP.Add(1);
+                            }
+                        }
+                        if (gameTypes.Contains($"[BwingameType]='{weightFinal.BwingameType}'") && !string.IsNullOrEmpty(weightFinal.BwingameType))
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalstrProd(glambda, "BwingameType", weightFinal.BwingameType, false, true);
+                            conditionPP.Add(1);
+                        }
+                        else if (gameTypes.Contains($"[BwingameType]!='{weightFinal.BwingameType}'") && !string.IsNullOrEmpty(weightFinal.BwingameType))
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalstrProd(glambda, "BwingameType", weightFinal.BwingameType, false, false);
+                            conditionPP.Add(1);
+                        }
+                        else if (string.IsNullOrEmpty(weightFinal.BwingameType))
+                        {
+                            if (gameTypes.Contains($"[BwingameType] is null"))
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalstrProd(glambda, "BwingameType", string.Empty, true, true);
+                                conditionPP.Add(1);
+                            }
+                            if (gameTypes.Contains($"[BwingameType] is not null"))
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalstrProd(glambda, "BwingameType", string.Empty, false, true);
+                                conditionPP.Add(1);
+                            }
+                        }
+                        if (gameTypes.Contains($"[EurobetgameType]='{weightFinal.EurobetgameType}'") && !string.IsNullOrEmpty(weightFinal.EurobetgameType))
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalstrProd(glambda, "EurobetgameType", weightFinal.EurobetgameType, false, true);
+                            conditionPP.Add(1);
+                        }
+                        else if (gameTypes.Contains($"[EurobetgameType]!='{weightFinal.EurobetgameType}'") && !string.IsNullOrEmpty(weightFinal.EurobetgameType))
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalstrProd(glambda, "EurobetgameType", weightFinal.EurobetgameType, false, false);
+                            conditionPP.Add(1);
+                        }
+                        else if (string.IsNullOrEmpty(weightFinal.EurobetgameType))
+                        {
+                            if (gameTypes.Contains($"[EurobetgameType] is null"))
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalstrProd(glambda, "EurobetgameType", string.Empty, true, true);
+                                conditionPP.Add(1);
+                            }
+                            if (gameTypes.Contains($"[EurobetgameType] is not null"))
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalstrProd(glambda, "EurobetgameType", string.Empty, false, true);
+                                conditionPP.Add(1);
+                            }
+                        }
+                        #endregion
+
+                        if (condition0.Count != conditionPP.Count)
+                        {
+                            continue;
+                        }
+                    }
+                    List<string> conditionvalue = new List<string>();
+                    List<int> condition2PP = new List<int>();
+
+                    if (!string.IsNullOrEmpty(item.condition))
+                    {
+                        //1表示>=  2表示> 3表示小于等于 4表示小于  5表示=  6表示!=
+
+                        conditionvalue = item.condition.Replace("and", "$").Split('$').ToList();
+                        string conditions = item.condition;
+                        #region Oddset
+                        if (conditions.Contains("hostWeight500>="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostWeight500>=")).FirstOrDefault().Replace("hostWeight500>=", ""));
+                            if (weightFinal.hostWeight500 >= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostWeight500", 1, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostWeight1000>="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostWeight1000>=")).FirstOrDefault().Replace("hostWeight1000>=", ""));
+                            if (weightFinal.hostWeight1000 >= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostWeight1000", 1, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostWeight2000>="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostWeight2000>=")).FirstOrDefault().Replace("hostWeight2000>=", ""));
+                            if (weightFinal.hostWeight2000 >= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostWeight2000", 1, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestWeight500>="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestWeight500>=")).FirstOrDefault().Replace("guestWeight500>=", ""));
+                            if (weightFinal.guestWeight500 >= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestWeight500", 1, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestWeight1000>="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestWeight1000>=")).FirstOrDefault().Replace("guestWeight1000>=", ""));
+                            if (weightFinal.guestWeight1000 >= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestWeight1000", 1, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestWeight2000>="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestWeight2000>=")).FirstOrDefault().Replace("guestWeight2000>=", ""));
+                            if (weightFinal.guestWeight2000 >= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestWeight2000", 1, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (conditionvalue.Any(s => !s.Contains("hostWeight500>=") && s.Contains("hostWeight500>")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("hostWeight500>=") && s.Contains("hostWeight500>")).FirstOrDefault().Replace("hostWeight500>", ""));
+                            if (weightFinal.hostWeight500 > provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostWeight500", 2, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("hostWeight1000>=") && s.Contains("hostWeight1000>")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("hostWeight1000>=") && s.Contains("hostWeight1000>")).FirstOrDefault().Replace("hostWeight1000>", ""));
+                            if (weightFinal.hostWeight1000 > provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostWeight1000", 2, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("hostWeight2000>=") && s.Contains("hostWeight2000>")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("hostWeight2000>=") && s.Contains("hostWeight2000>")).FirstOrDefault().Replace("hostWeight2000>", ""));
+                            if (weightFinal.hostWeight2000 > provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostWeight2000", 2, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("guestWeight500>=") && s.Contains("guestWeight500>")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("guestWeight500>=") && s.Contains("guestWeight500>")).FirstOrDefault().Replace("guestWeight500>", ""));
+                            if (weightFinal.guestWeight500 > provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestWeight500", 2, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("guestWeight1000>=") && s.Contains("guestWeight1000>")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("guestWeight1000>=") && s.Contains("guestWeight1000>")).FirstOrDefault().Replace("guestWeight1000>", ""));
+                            if (weightFinal.guestWeight1000 > provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestWeight1000", 2, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("guestWeight2000>=") && s.Contains("guestWeight2000>")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("guestWeight2000>=") && s.Contains("guestWeight2000>")).FirstOrDefault().Replace("guestWeight2000>", ""));
+                            if (weightFinal.guestWeight2000 > provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestWeight2000", 2, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (conditions.Contains("hostWeight500<="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostWeight500<=")).FirstOrDefault().Replace("hostWeight500<=", ""));
+                            if (weightFinal.hostWeight500 <= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostWeight500", 3, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostWeight1000<="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostWeight1000<=")).FirstOrDefault().Replace("hostWeight1000<=", ""));
+                            if (weightFinal.hostWeight1000 <= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostWeight1000", 3, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostWeight2000<="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostWeight2000<=")).FirstOrDefault().Replace("hostWeight2000<=", ""));
+                            if (weightFinal.hostWeight2000 <= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostWeight2000", 3, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestWeight500<="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestWeight500<=")).FirstOrDefault().Replace("guestWeight500<=", ""));
+                            if (weightFinal.guestWeight500 <= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestWeight500", 3, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestWeight1000<="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestWeight1000<=")).FirstOrDefault().Replace("guestWeight1000<=", ""));
+                            if (weightFinal.guestWeight1000 <= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestWeight1000", 3, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestWeight2000<="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestWeight2000<=")).FirstOrDefault().Replace("guestWeight2000<=", ""));
+                            if (weightFinal.guestWeight2000 <= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestWeight2000", 3, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (conditionvalue.Any(s => !s.Contains("hostWeight500<=") && s.Contains("hostWeight500<")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("hostWeight500<=") && s.Contains("hostWeight500<")).FirstOrDefault().Replace("hostWeight500<", ""));
+                            if (weightFinal.hostWeight500 < provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostWeight500", 4, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("hostWeight1000<=") && s.Contains("hostWeight1000<")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("hostWeight1000<=") && s.Contains("hostWeight1000<")).FirstOrDefault().Replace("hostWeight1000<", ""));
+                            if (weightFinal.hostWeight1000 < provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostWeight1000", 4, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("hostWeight2000<=") && s.Contains("hostWeight2000<")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("hostWeight2000<=") && s.Contains("hostWeight2000<")).FirstOrDefault().Replace("hostWeight2000<", ""));
+                            if (weightFinal.hostWeight2000 < provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostWeight2000", 4, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("guestWeight500<=") && s.Contains("guestWeight500<")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("guestWeight500<=") && s.Contains("guestWeight500<")).FirstOrDefault().Replace("guestWeight500<", ""));
+                            if (weightFinal.guestWeight500 < provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestWeight500", 4, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("guestWeight1000<=") && s.Contains("guestWeight1000<")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("guestWeight1000<=") && s.Contains("guestWeight1000<")).FirstOrDefault().Replace("guestWeight1000<", ""));
+                            if (weightFinal.guestWeight1000 < provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestWeight1000", 4, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("guestWeight2000<=") && s.Contains("guestWeight2000<")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("guestWeight2000<=") && s.Contains("guestWeight2000<")).FirstOrDefault().Replace("guestWeight2000<", ""));
+                            if (weightFinal.guestWeight2000 < provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestWeight2000", 4, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (conditions.Contains("hostWeight500="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostWeight500=")).FirstOrDefault().Replace("hostWeight500=", ""));
+                            if (weightFinal.hostWeight500 == provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostWeight500", 5, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostWeight1000="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostWeight1000=")).FirstOrDefault().Replace("hostWeight1000=", ""));
+                            if (weightFinal.hostWeight1000 == provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostWeight1000", 5, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostWeight2000="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostWeight2000=")).FirstOrDefault().Replace("hostWeight2000=", ""));
+                            if (weightFinal.hostWeight2000 == provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostWeight2000", 5, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestWeight500="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestWeight500=")).FirstOrDefault().Replace("guestWeight500=", ""));
+                            if (weightFinal.guestWeight500 == provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestWeight500", 5, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestWeight1000="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestWeight1000=")).FirstOrDefault().Replace("guestWeight1000=", ""));
+                            if (weightFinal.guestWeight1000 == provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestWeight1000", 5, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestWeight2000="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestWeight2000=")).FirstOrDefault().Replace("guestWeight2000=", ""));
+                            if (weightFinal.guestWeight2000 == provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestWeight2000", 5, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (conditions.Contains("hostWeight500!="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostWeight500!=")).FirstOrDefault().Replace("hostWeight500!=", ""));
+                            if (weightFinal.hostWeight500 != provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostWeight500", 6, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostWeight1000!="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostWeight1000!=")).FirstOrDefault().Replace("hostWeight1000!=", ""));
+                            if (weightFinal.hostWeight1000 != provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostWeight1000", 6, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostWeight2000!="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostWeight2000!=")).FirstOrDefault().Replace("hostWeight2000!=", ""));
+                            if (weightFinal.hostWeight2000 != provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostWeight2000", 6, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestWeight500!="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestWeight500!=")).FirstOrDefault().Replace("guestWeight500!=", ""));
+                            if (weightFinal.guestWeight500 != provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestWeight500", 6, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestWeight1000!="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestWeight1000!=")).FirstOrDefault().Replace("guestWeight1000!=", ""));
+                            if (weightFinal.guestWeight1000 != provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestWeight1000", 6, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestWeight2000!="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestWeight2000!=")).FirstOrDefault().Replace("guestWeight2000!=", ""));
+                            if (weightFinal.guestWeight2000 != provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestWeight2000", 6, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        #endregion
+
+                        #region AM
+                        if (conditions.Contains("hostAMWeight500>="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostAMWeight500>=")).FirstOrDefault().Replace("hostAMWeight500>=", ""));
+                            if (weightFinal.hostAMWeight500 >= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostAMWeight500", 1, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostAMWeight1000>="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostAMWeight1000>=")).FirstOrDefault().Replace("hostAMWeight1000>=", ""));
+                            if (weightFinal.hostAMWeight1000 >= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostAMWeight1000", 1, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostAMWeight2000>="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostAMWeight2000>=")).FirstOrDefault().Replace("hostAMWeight2000>=", ""));
+                            if (weightFinal.hostAMWeight2000 >= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostAMWeight2000", 1, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestAMWeight500>="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestAMWeight500>=")).FirstOrDefault().Replace("guestAMWeight500>=", ""));
+                            if (weightFinal.guestAMWeight500 >= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestAMWeight500", 1, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestAMWeight1000>="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestAMWeight1000>=")).FirstOrDefault().Replace("guestAMWeight1000>=", ""));
+                            if (weightFinal.guestAMWeight1000 >= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestAMWeight1000", 1, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestAMWeight2000>="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestAMWeight2000>=")).FirstOrDefault().Replace("guestAMWeight2000>=", ""));
+                            if (weightFinal.guestAMWeight2000 >= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestAMWeight2000", 1, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (conditionvalue.Any(s => !s.Contains("hostAMWeight500>=") && s.Contains("hostAMWeight500>")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("hostAMWeight500>=") && s.Contains("hostAMWeight500>")).FirstOrDefault().Replace("hostAMWeight500>", ""));
+                            if (weightFinal.hostAMWeight500 > provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostAMWeight500", 2, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("hostAMWeight1000>=") && s.Contains("hostAMWeight1000>")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("hostAMWeight1000>=") && s.Contains("hostAMWeight1000>")).FirstOrDefault().Replace("hostAMWeight1000>", ""));
+                            if (weightFinal.hostAMWeight1000 > provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostAMWeight1000", 2, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("hostAMWeight2000>=") && s.Contains("hostAMWeight2000>")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("hostAMWeight2000>=") && s.Contains("hostAMWeight2000>")).FirstOrDefault().Replace("hostAMWeight2000>", ""));
+                            if (weightFinal.hostAMWeight2000 > provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostAMWeight2000", 2, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("guestAMWeight500>=") && s.Contains("guestAMWeight500>")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("guestAMWeight500>=") && s.Contains("guestAMWeight500>")).FirstOrDefault().Replace("guestAMWeight500>", ""));
+                            if (weightFinal.guestAMWeight500 > provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestAMWeight500", 2, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("guestAMWeight1000>=") && s.Contains("guestAMWeight1000>")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("guestAMWeight1000>=") && s.Contains("guestAMWeight1000>")).FirstOrDefault().Replace("guestAMWeight1000>", ""));
+                            if (weightFinal.guestAMWeight1000 > provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestAMWeight1000", 2, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("guestAMWeight2000>=") && s.Contains("guestAMWeight2000>")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("guestAMWeight2000>=") && s.Contains("guestAMWeight2000>")).FirstOrDefault().Replace("guestAMWeight2000>", ""));
+                            if (weightFinal.guestAMWeight2000 > provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestAMWeight2000", 2, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (conditions.Contains("hostAMWeight500<="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostAMWeight500<=")).FirstOrDefault().Replace("hostAMWeight500<=", ""));
+                            if (weightFinal.hostAMWeight500 <= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostAMWeight500", 3, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostAMWeight1000<="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostAMWeight1000<=")).FirstOrDefault().Replace("hostAMWeight1000<=", ""));
+                            if (weightFinal.hostAMWeight1000 <= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostAMWeight1000", 3, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostAMWeight2000<="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostAMWeight2000<=")).FirstOrDefault().Replace("hostAMWeight2000<=", ""));
+                            if (weightFinal.hostAMWeight2000 <= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostAMWeight2000", 3, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestAMWeight500<="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestAMWeight500<=")).FirstOrDefault().Replace("guestAMWeight500<=", ""));
+                            if (weightFinal.guestAMWeight500 <= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestAMWeight500", 3, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestAMWeight1000<="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestAMWeight1000<=")).FirstOrDefault().Replace("guestAMWeight1000<=", ""));
+                            if (weightFinal.guestAMWeight1000 <= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestAMWeight1000", 3, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestAMWeight2000<="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestAMWeight2000<=")).FirstOrDefault().Replace("guestAMWeight2000<=", ""));
+                            if (weightFinal.guestAMWeight2000 <= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestAMWeight2000", 3, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (conditionvalue.Any(s => !s.Contains("hostAMWeight500<=") && s.Contains("hostAMWeight500<")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("hostAMWeight500<=") && s.Contains("hostAMWeight500<")).FirstOrDefault().Replace("hostAMWeight500<", ""));
+                            if (weightFinal.hostAMWeight500 < provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostAMWeight500", 4, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("hostAMWeight1000<=") && s.Contains("hostAMWeight1000<")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("hostAMWeight1000<=") && s.Contains("hostAMWeight1000<")).FirstOrDefault().Replace("hostAMWeight1000<", ""));
+                            if (weightFinal.hostAMWeight1000 < provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostAMWeight1000", 4, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("hostAMWeight2000<=") && s.Contains("hostAMWeight2000<")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("hostAMWeight2000<=") && s.Contains("hostAMWeight2000<")).FirstOrDefault().Replace("hostAMWeight2000<", ""));
+                            if (weightFinal.hostAMWeight2000 < provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostAMWeight2000", 4, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("guestAMWeight500<=") && s.Contains("guestAMWeight500<")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("guestAMWeight500<=") && s.Contains("guestAMWeight500<")).FirstOrDefault().Replace("guestAMWeight500<", ""));
+                            if (weightFinal.guestAMWeight500 < provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestAMWeight500", 4, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("guestAMWeight1000<=") && s.Contains("guestAMWeight1000<")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("guestAMWeight1000<=") && s.Contains("guestAMWeight1000<")).FirstOrDefault().Replace("guestAMWeight1000<", ""));
+                            if (weightFinal.guestAMWeight1000 < provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestAMWeight1000", 4, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("guestAMWeight2000<=") && s.Contains("guestAMWeight2000<")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("guestAMWeight2000<=") && s.Contains("guestAMWeight2000<")).FirstOrDefault().Replace("guestAMWeight2000<", ""));
+                            if (weightFinal.guestAMWeight2000 < provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestAMWeight2000", 4, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (conditions.Contains("hostAMWeight500="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostAMWeight500=")).FirstOrDefault().Replace("hostAMWeight500=", ""));
+                            if (weightFinal.hostAMWeight500 == provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostAMWeight500", 5, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostAMWeight1000="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostAMWeight1000=")).FirstOrDefault().Replace("hostAMWeight1000=", ""));
+                            if (weightFinal.hostAMWeight1000 == provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostAMWeight1000", 5, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostAMWeight2000="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostAMWeight2000=")).FirstOrDefault().Replace("hostAMWeight2000=", ""));
+                            if (weightFinal.hostAMWeight2000 == provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostAMWeight2000", 5, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestAMWeight500="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestAMWeight500=")).FirstOrDefault().Replace("guestAMWeight500=", ""));
+                            if (weightFinal.guestAMWeight500 == provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestAMWeight500", 5, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestAMWeight1000="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestAMWeight1000=")).FirstOrDefault().Replace("guestAMWeight1000=", ""));
+                            if (weightFinal.guestAMWeight1000 == provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestAMWeight1000", 5, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestAMWeight2000="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestAMWeight2000=")).FirstOrDefault().Replace("guestAMWeight2000=", ""));
+                            if (weightFinal.guestAMWeight2000 == provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestAMWeight2000", 5, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (conditions.Contains("hostAMWeight500!="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostAMWeight500!=")).FirstOrDefault().Replace("hostAMWeight500!=", ""));
+                            if (weightFinal.hostAMWeight500 != provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostAMWeight500", 6, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostAMWeight1000!="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostAMWeight1000!=")).FirstOrDefault().Replace("hostAMWeight1000!=", ""));
+                            if (weightFinal.hostAMWeight1000 != provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostAMWeight1000", 6, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostAMWeight2000!="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostAMWeight2000!=")).FirstOrDefault().Replace("hostAMWeight2000!=", ""));
+                            if (weightFinal.hostAMWeight2000 != provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostAMWeight2000", 6, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestAMWeight500!="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestAMWeight500!=")).FirstOrDefault().Replace("guestAMWeight500!=", ""));
+                            if (weightFinal.guestAMWeight500 != provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestAMWeight500", 6, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestAMWeight1000!="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestAMWeight1000!=")).FirstOrDefault().Replace("guestAMWeight1000!=", ""));
+                            if (weightFinal.guestAMWeight1000 != provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestAMWeight1000", 6, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestAMWeight2000!="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestAMWeight2000!=")).FirstOrDefault().Replace("guestAMWeight2000!=", ""));
+                            if (weightFinal.guestAMWeight2000 != provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestAMWeight2000", 6, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        #endregion
+
+                        #region Bwin
+                        if (conditions.Contains("hostBwinWeight500>="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostBwinWeight500>=")).FirstOrDefault().Replace("hostBwinWeight500>=", ""));
+                            if (weightFinal.hostBwinWeight500 >= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostBwinWeight500", 1, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostBwinWeight1000>="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostBwinWeight1000>=")).FirstOrDefault().Replace("hostBwinWeight1000>=", ""));
+                            if (weightFinal.hostBwinWeight1000 >= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostBwinWeight1000", 1, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostBwinWeight2000>="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostBwinWeight2000>=")).FirstOrDefault().Replace("hostBwinWeight2000>=", ""));
+                            if (weightFinal.hostBwinWeight2000 >= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostBwinWeight2000", 1, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestBwinWeight500>="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestBwinWeight500>=")).FirstOrDefault().Replace("guestBwinWeight500>=", ""));
+                            if (weightFinal.guestBwinWeight500 >= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestBwinWeight500", 1, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestBwinWeight1000>="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestBwinWeight1000>=")).FirstOrDefault().Replace("guestBwinWeight1000>=", ""));
+                            if (weightFinal.guestBwinWeight1000 >= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestBwinWeight1000", 1, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestBwinWeight2000>="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestBwinWeight2000>=")).FirstOrDefault().Replace("guestBwinWeight2000>=", ""));
+                            if (weightFinal.guestBwinWeight2000 >= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestBwinWeight2000", 1, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (conditionvalue.Any(s => !s.Contains("hostBwinWeight500>=") && s.Contains("hostBwinWeight500>")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("hostBwinWeight500>=") && s.Contains("hostBwinWeight500>")).FirstOrDefault().Replace("hostBwinWeight500>", ""));
+                            if (weightFinal.hostBwinWeight500 > provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostBwinWeight500", 2, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("hostBwinWeight1000>=") && s.Contains("hostBwinWeight1000>")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("hostBwinWeight1000>=") && s.Contains("hostBwinWeight1000>")).FirstOrDefault().Replace("hostBwinWeight1000>", ""));
+                            if (weightFinal.hostBwinWeight1000 > provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostBwinWeight1000", 2, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("hostBwinWeight2000>=") && s.Contains("hostBwinWeight2000>")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("hostBwinWeight2000>=") && s.Contains("hostBwinWeight2000>")).FirstOrDefault().Replace("hostBwinWeight2000>", ""));
+                            if (weightFinal.hostBwinWeight2000 > provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostBwinWeight2000", 2, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("guestBwinWeight500>=") && s.Contains("guestBwinWeight500>")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("guestBwinWeight500>=") && s.Contains("guestBwinWeight500>")).FirstOrDefault().Replace("guestBwinWeight500>", ""));
+                            if (weightFinal.guestBwinWeight500 > provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestBwinWeight500", 2, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("guestBwinWeight1000>=") && s.Contains("guestBwinWeight1000>")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("guestBwinWeight1000>=") && s.Contains("guestBwinWeight1000>")).FirstOrDefault().Replace("guestBwinWeight1000>", ""));
+                            if (weightFinal.guestBwinWeight1000 > provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestBwinWeight1000", 2, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("guestBwinWeight2000>=") && s.Contains("guestBwinWeight2000>")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("guestBwinWeight2000>=") && s.Contains("guestBwinWeight2000>")).FirstOrDefault().Replace("guestBwinWeight2000>", ""));
+                            if (weightFinal.guestBwinWeight2000 > provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestBwinWeight2000", 2, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (conditions.Contains("hostBwinWeight500<="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostBwinWeight500<=")).FirstOrDefault().Replace("hostBwinWeight500<=", ""));
+                            if (weightFinal.hostBwinWeight500 <= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostBwinWeight500", 3, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostBwinWeight1000<="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostBwinWeight1000<=")).FirstOrDefault().Replace("hostBwinWeight1000<=", ""));
+                            if (weightFinal.hostBwinWeight1000 <= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostBwinWeight1000", 3, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostBwinWeight2000<="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostBwinWeight2000<=")).FirstOrDefault().Replace("hostBwinWeight2000<=", ""));
+                            if (weightFinal.hostBwinWeight2000 <= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostBwinWeight2000", 3, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestBwinWeight500<="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestBwinWeight500<=")).FirstOrDefault().Replace("guestBwinWeight500<=", ""));
+                            if (weightFinal.guestBwinWeight500 <= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestBwinWeight500", 3, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestBwinWeight1000<="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestBwinWeight1000<=")).FirstOrDefault().Replace("guestBwinWeight1000<=", ""));
+                            if (weightFinal.guestBwinWeight1000 <= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestBwinWeight1000", 3, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestBwinWeight2000<="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestBwinWeight2000<=")).FirstOrDefault().Replace("guestBwinWeight2000<=", ""));
+                            if (weightFinal.guestBwinWeight2000 <= provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestBwinWeight2000", 3, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (conditionvalue.Any(s => !s.Contains("hostBwinWeight500<=") && s.Contains("hostBwinWeight500<")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("hostBwinWeight500<=") && s.Contains("hostBwinWeight500<")).FirstOrDefault().Replace("hostBwinWeight500<", ""));
+                            if (weightFinal.hostBwinWeight500 < provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostBwinWeight500", 4, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("hostBwinWeight1000<=") && s.Contains("hostBwinWeight1000<")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("hostBwinWeight1000<=") && s.Contains("hostBwinWeight1000<")).FirstOrDefault().Replace("hostBwinWeight1000<", ""));
+                            if (weightFinal.hostBwinWeight1000 < provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostBwinWeight1000", 4, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("hostBwinWeight2000<=") && s.Contains("hostBwinWeight2000<")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("hostBwinWeight2000<=") && s.Contains("hostBwinWeight2000<")).FirstOrDefault().Replace("hostBwinWeight2000<", ""));
+                            if (weightFinal.hostBwinWeight2000 < provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostBwinWeight2000", 4, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("guestBwinWeight500<=") && s.Contains("guestBwinWeight500<")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("guestBwinWeight500<=") && s.Contains("guestBwinWeight500<")).FirstOrDefault().Replace("guestBwinWeight500<", ""));
+                            if (weightFinal.guestBwinWeight500 < provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestBwinWeight500", 4, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("guestBwinWeight1000<=") && s.Contains("guestBwinWeight1000<")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("guestBwinWeight1000<=") && s.Contains("guestBwinWeight1000<")).FirstOrDefault().Replace("guestBwinWeight1000<", ""));
+                            if (weightFinal.guestBwinWeight1000 < provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestBwinWeight1000", 4, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditionvalue.Any(s => !s.Contains("guestBwinWeight2000<=") && s.Contains("guestBwinWeight2000<")))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => !s.Contains("guestBwinWeight2000<=") && s.Contains("guestBwinWeight2000<")).FirstOrDefault().Replace("guestBwinWeight2000<", ""));
+                            if (weightFinal.guestBwinWeight2000 < provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestBwinWeight2000", 4, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (conditions.Contains("hostBwinWeight500="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostBwinWeight500=")).FirstOrDefault().Replace("hostBwinWeight500=", ""));
+                            if (weightFinal.hostBwinWeight500 == provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostBwinWeight500", 5, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostBwinWeight1000="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostBwinWeight1000=")).FirstOrDefault().Replace("hostBwinWeight1000=", ""));
+                            if (weightFinal.hostBwinWeight1000 == provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostBwinWeight1000", 5, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostBwinWeight2000="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostBwinWeight2000=")).FirstOrDefault().Replace("hostBwinWeight2000=", ""));
+                            if (weightFinal.hostBwinWeight2000 == provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostBwinWeight2000", 5, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestBwinWeight500="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestBwinWeight500=")).FirstOrDefault().Replace("guestBwinWeight500=", ""));
+                            if (weightFinal.guestBwinWeight500 == provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestBwinWeight500", 5, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestBwinWeight1000="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestBwinWeight1000=")).FirstOrDefault().Replace("guestBwinWeight1000=", ""));
+                            if (weightFinal.guestBwinWeight1000 == provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestBwinWeight1000", 5, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestBwinWeight2000="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestBwinWeight2000=")).FirstOrDefault().Replace("guestBwinWeight2000=", ""));
+                            if (weightFinal.guestBwinWeight2000 == provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestBwinWeight2000", 5, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (conditions.Contains("hostBwinWeight500!="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostBwinWeight500!=")).FirstOrDefault().Replace("hostBwinWeight500!=", ""));
+                            if (weightFinal.hostBwinWeight500 != provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostBwinWeight500", 6, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostBwinWeight1000!="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostBwinWeight1000!=")).FirstOrDefault().Replace("hostBwinWeight1000!=", ""));
+                            if (weightFinal.hostBwinWeight1000 != provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostBwinWeight1000", 6, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("hostBwinWeight2000!="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("hostBwinWeight2000!=")).FirstOrDefault().Replace("hostBwinWeight2000!=", ""));
+                            if (weightFinal.hostBwinWeight2000 != provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostBwinWeight2000", 6, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestBwinWeight500!="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestBwinWeight500!=")).FirstOrDefault().Replace("guestBwinWeight500!=", ""));
+                            if (weightFinal.guestBwinWeight500 != provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestBwinWeight500", 6, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestBwinWeight1000!="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestBwinWeight1000!=")).FirstOrDefault().Replace("guestBwinWeight1000!=", ""));
+                            if (weightFinal.guestBwinWeight1000 != provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestBwinWeight1000", 6, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (conditions.Contains("guestBwinWeight2000!="))
+                        {
+                            double provalue = double.Parse(conditionvalue.Where(s => s.Contains("guestBwinWeight2000!=")).FirstOrDefault().Replace("guestBwinWeight2000!=", ""));
+                            if (weightFinal.guestBwinWeight2000 != provalue)
+                            {
+                                glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestBwinWeight2000", 6, provalue);
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        #endregion
+
+                        #region Eurobet
+                        if (conditions.Contains("hostEurobetWeight500>=0") && weightFinal.hostEurobetWeight500 >= 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostEurobetWeight500", 1);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("hostEurobetWeight1000>=0") && weightFinal.hostEurobetWeight1000 >= 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostEurobetWeight1000", 1);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("hostEurobetWeight2000>=0") && weightFinal.hostEurobetWeight2000 >= 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostEurobetWeight2000", 1);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("guestEurobetWeight500>=0") && weightFinal.guestEurobetWeight500 >= 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestEurobetWeight500", 1);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("guestEurobetWeight1000>=0") && weightFinal.guestEurobetWeight1000 >= 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestEurobetWeight1000", 1);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("guestEurobetWeight2000>=0") && weightFinal.guestEurobetWeight2000 >= 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestEurobetWeight2000", 1);
+                            condition2PP.Add(1);
+                        }
+
+                        if (conditions.Contains("hostEurobetWeight500>0") && weightFinal.hostEurobetWeight500 > 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostEurobetWeight500", 2);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("hostEurobetWeight1000>0") && weightFinal.hostEurobetWeight1000 > 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostEurobetWeight1000", 2);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("hostEurobetWeight2000>0") && weightFinal.hostEurobetWeight2000 > 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostEurobetWeight2000", 2);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("guestEurobetWeight500>0") && weightFinal.guestEurobetWeight500 > 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestEurobetWeight500", 2);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("guestEurobetWeight1000>0") && weightFinal.guestEurobetWeight1000 > 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestEurobetWeight1000", 2);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("guestEurobetWeight2000>0") && weightFinal.guestEurobetWeight2000 > 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestEurobetWeight2000", 2);
+                            condition2PP.Add(1);
+                        }
+
+                        if (conditions.Contains("hostEurobetWeight500<=0") && weightFinal.hostEurobetWeight500 <= 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostEurobetWeight500", 3);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("hostEurobetWeight1000<=0") && weightFinal.hostEurobetWeight1000 <= 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostEurobetWeight1000", 3);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("hostEurobetWeight2000<=0") && weightFinal.hostEurobetWeight2000 <= 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostEurobetWeight2000", 3);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("guestEurobetWeight500<=0") && weightFinal.guestEurobetWeight500 <= 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestEurobetWeight500", 3);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("guestEurobetWeight1000<=0") && weightFinal.guestEurobetWeight1000 <= 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestEurobetWeight1000", 3);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("guestEurobetWeight2000<=0") && weightFinal.guestEurobetWeight2000 <= 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestEurobetWeight2000", 3);
+                            condition2PP.Add(1);
+                        }
+
+                        if (conditions.Contains("hostEurobetWeight500<0") && weightFinal.hostEurobetWeight500 < 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostEurobetWeight500", 4);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("hostEurobetWeight1000<0") && weightFinal.hostEurobetWeight1000 < 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostEurobetWeight1000", 4);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("hostEurobetWeight2000<0") && weightFinal.hostEurobetWeight2000 < 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostEurobetWeight2000", 4);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("guestEurobetWeight500<0") && weightFinal.guestEurobetWeight500 < 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestEurobetWeight500", 4);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("guestEurobetWeight1000<0") && weightFinal.guestEurobetWeight1000 < 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestEurobetWeight1000", 4);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("guestEurobetWeight2000<0") && weightFinal.guestEurobetWeight2000 < 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestEurobetWeight2000", 4);
+                            condition2PP.Add(1);
+                        }
+
+                        if (conditions.Contains("hostEurobetWeight500=0") && weightFinal.hostEurobetWeight500 == 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostEurobetWeight500", 5);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("hostEurobetWeight1000=0") && weightFinal.hostEurobetWeight1000 == 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostEurobetWeight1000", 5);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("hostEurobetWeight2000=0") && weightFinal.hostEurobetWeight2000 == 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostEurobetWeight2000", 5);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("guestEurobetWeight500=0") && weightFinal.guestEurobetWeight500 == 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestEurobetWeight500", 5);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("guestEurobetWeight1000=0") && weightFinal.guestEurobetWeight1000 == 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestEurobetWeight1000", 5);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("guestEurobetWeight2000=0") && weightFinal.guestEurobetWeight2000 == 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestEurobetWeight2000", 5);
+                            condition2PP.Add(1);
+                        }
+
+                        if (conditions.Contains("hostEurobetWeight500!=0") && weightFinal.hostEurobetWeight500 != 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostEurobetWeight500", 6);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("hostEurobetWeight1000!=0") && weightFinal.hostEurobetWeight1000 != 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostEurobetWeight1000", 6);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("hostEurobetWeight2000!=0") && weightFinal.hostEurobetWeight2000 != 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "hostEurobetWeight2000", 6);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("guestEurobetWeight500!=0") && weightFinal.guestEurobetWeight500 != 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestEurobetWeight500", 6);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("guestEurobetWeight1000!=0") && weightFinal.guestEurobetWeight1000 != 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestEurobetWeight1000", 6);
+                            condition2PP.Add(1);
+                        }
+                        if (conditions.Contains("guestEurobetWeight2000!=0") && weightFinal.guestEurobetWeight2000 != 0)
+                        {
+                            glambda = LambdaCreate.createLambdaWeightFinalProd(glambda, "guestEurobetWeight2000", 6);
+                            condition2PP.Add(1);
+                        }
+                        #endregion
+                    }
+                    if (conditionvalue.Count != condition2PP.Count)
+                    {
+                        continue;
+                    }
+
+                    string[] condition2 = item.condition2.Split('|');
+
+                    //第一位 H 表示主队输赢   G表示客队输赢
+                    //第二位 10 表示取最近多少场次
+                    //第三位 80 表示最近场次赢的百分比
+                    //第四位 Y 表示赢球结果  N表示输球结果
+                    //H|10|80|Y
+                    int CC = Convert.ToInt32(condition2[1]);
+                    double BFB = Convert.ToDouble(condition2[2]);
+                    if (condition2[0] == "H")
+                    {
+                        List<WeightFinalALLProd> matchWeightFinalFilter = matchWeightFinalALL.Where(glambda.Compile()).OrderByDescending(a => a.id).Take(CC).ToList();
+
+                        if (condition2[3] == "Y")
+                        {
+                            if (matchWeightFinalFilter.Count(a => a.hostResult == "y") * 1.0 / CC >= BFB * 1.0 / 100)
+                            {
+                                weightFinal.YCResult = weightFinal.YCResult + item.id + ":" + "Y";
+
+                                if (!string.IsNullOrEmpty(hostResult))
+                                {
+                                    if (hostResult == "y")
+                                    {
+                                        item.HostYCWin = item.HostYCWin + 1;
+                                    }
+                                    else
+                                    {
+                                        item.HostYCPing = item.HostYCPing + 1;
+                                    }
+                                    item.HostTotal = item.HostTotal + 1;
+                                }
+                            }
+                        }
+
+                        if (condition2[3] == "N")
+                        {
+                            if (matchWeightFinalFilter.Count(a => a.hostResult == "n") * 1.0 / CC >= BFB * 1.0 / 100)
+                            {
+                                weightFinal.YCResult = weightFinal.YCResult + item.id + ":" + "N";
+
+                                if (!string.IsNullOrEmpty(hostResult))
+                                {
+                                    if (hostResult == "n")
+                                    {
+                                        item.HostYCWin = item.HostYCWin + 1;
+                                    }
+                                    else
+                                    {
+                                        item.HostYCPing = item.HostYCPing + 1;
+                                    }
+                                    item.HostTotal = item.HostTotal + 1;
+                                }
+                            }
+                        }
+                    }
+
+                    if (condition2[0] == "G")
+                    {
+                        List<WeightFinalALLProd> matchWeightFinalFilter = matchWeightFinalALL.Where(glambda.Compile()).Take(CC).ToList();
+
+                        if (condition2[3] == "Y")
+                        {
+                            if (matchWeightFinalFilter.Count(a => a.guestResult == "y") * 1.0 / CC > BFB / 100)
+                            {
+                                weightFinal.YGPResult = weightFinal.YGPResult + "Y";
+
+                                if (!string.IsNullOrEmpty(guestResult))
+                                {
+                                    if (guestResult == "y")
+                                    {
+                                        item.GuestYCWin = item.GuestYCWin + 1;
+                                    }
+                                    else
+                                    {
+                                        item.GuestYCPing = item.GuestYCPing + 1;
+                                    }
+                                    item.GuestTotal = item.GuestTotal + 1;
+                                }
+                            }
+                        }
+
+                        if (condition2[3] == "N")
+                        {
+                            if (matchWeightFinalFilter.Count(a => a.guestResult == "n") * 1.0 / CC > BFB / 100)
+                            {
+                                weightFinal.YGPResult = weightFinal.YGPResult + "N";
+
+                                if (!string.IsNullOrEmpty(guestResult))
+                                {
+                                    if (guestResult == "n")
+                                    {
+                                        item.GuestYCWin = item.GuestYCWin + 1;
+                                    }
+                                    else
+                                    {
+                                        item.GuestYCPing = item.GuestYCPing + 1;
+                                    }
+                                    item.GuestTotal = item.GuestTotal + 1;
+                                }
+                            }
+                        }
+                    }
+
+                }
+                else
+                {
+                    List<string> condition0 = item.condition0.Replace("and", "$").Split('$').ToList();
+                    List<int> conditionPP = new List<int>();
+                    #region 类型
+                    if (condition0.Any(a => a.Trim().Equals($"[gameType]='{weightFinal.gameType}'")) && !string.IsNullOrEmpty(weightFinal.gameType))
+                    {
+                        conditionPP.Add(1);
+                    }
+                    else if (condition0.Any(a => a.Trim().Equals($"[gameType]!='{weightFinal.gameType}'")) && !string.IsNullOrEmpty(weightFinal.gameType))
+                    {
+                        conditionPP.Add(1);
+                    }
+                    else if (string.IsNullOrEmpty(weightFinal.gameType))
+                    {
+                        if (condition0.Any(a => a.Trim().Equals($"[gameType] is null")))
+                        {
+                            conditionPP.Add(1);
+                        }
+                        if (condition0.Any(a => a.Trim().Equals($"[gameType] is not null")))
+                        {
+                            conditionPP.Add(1);
+                        }
+                    }
+                    if (condition0.Any(a => a.Trim().Equals($"[AMgameType]='{weightFinal.AMgameType}'")) && !string.IsNullOrEmpty(weightFinal.AMgameType))
+                    {
+                        conditionPP.Add(1);
+                    }
+                    else if (condition0.Any(a => a.Trim().Equals($"[AMgameType]!='{weightFinal.AMgameType}'")) && !string.IsNullOrEmpty(weightFinal.AMgameType))
+                    {
+                        conditionPP.Add(1);
+                    }
+                    else if (string.IsNullOrEmpty(weightFinal.AMgameType))
+                    {
+                        if (condition0.Any(a => a.Trim().Equals($"[AMgameType] is null")))
+                        {
+                            conditionPP.Add(1);
+                        }
+                        if (condition0.Any(a => a.Trim().Equals($"[AMgameType] is not null")))
+                        {
+                            conditionPP.Add(1);
+                        }
+                    }
+                    if (condition0.Any(a => a.Trim().Equals($"[BwingameType]='{weightFinal.BwingameType}'")) && !string.IsNullOrEmpty(weightFinal.BwingameType))
+                    {
+                        conditionPP.Add(1);
+                    }
+                    else if (condition0.Any(a => a.Trim().Equals($"[BwingameType]!='{weightFinal.BwingameType}'")) && !string.IsNullOrEmpty(weightFinal.BwingameType))
+                    {
+                        conditionPP.Add(1);
+                    }
+                    else if (string.IsNullOrEmpty(weightFinal.BwingameType))
+                    {
+                        if (condition0.Any(a => a.Trim().Equals($"[BwingameType] is null")))
+                        {
+                            conditionPP.Add(1);
+                        }
+                        if (condition0.Any(a => a.Trim().Equals($"[BwingameType] is not null")))
+                        {
+                            conditionPP.Add(1);
+                        }
+                    }
+                    if (condition0.Any(a => a.Trim().Equals($"[EurobetgameType]='{weightFinal.EurobetgameType}'")) && !string.IsNullOrEmpty(weightFinal.EurobetgameType))
+                    {
+                        conditionPP.Add(1);
+                    }
+                    else if (condition0.Any(a => a.Trim().Equals($"[EurobetgameType]!='{weightFinal.EurobetgameType}'")) && !string.IsNullOrEmpty(weightFinal.EurobetgameType))
+                    {
+                        conditionPP.Add(1);
+                    }
+                    else if (string.IsNullOrEmpty(weightFinal.EurobetgameType))
+                    {
+                        if (condition0.Any(a => a.Trim().Equals($"[EurobetgameType] is null")))
+                        {
+                            conditionPP.Add(1);
+                        }
+                        if (condition0.Any(a => a.Trim().Equals($"[EurobetgameType] is not null")))
+                        {
+                            conditionPP.Add(1);
+                        }
+                    }
+                    #endregion
+
+                    List<string> condition2 = new List<string>();
+                    List<int> condition2PP = new List<int>();
+
+                    if (condition0.Count - 1 != conditionPP.Count)
+                    {
+                        continue;
+                    }
+
+                    if (!string.IsNullOrEmpty(item.condition))
+                    {
+                        //1表示>=  2表示> 3表示小于等于 4表示小于  5表示=  6表示!=
+                        condition2 = item.condition.Replace("and", "$").Split('$').ToList();
+                        string condition2str = item.condition;
+
+                        #region Oddset
+                        if (condition2str.Contains("hostWeight500>="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostWeight500>=")).FirstOrDefault().Replace("hostWeight500>=", ""));
+                            if (weightFinal.hostWeight500 >= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostWeight1000>="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostWeight1000>=")).FirstOrDefault().Replace("hostWeight1000>=", ""));
+                            if (weightFinal.hostWeight1000 >= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostWeight2000>="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostWeight2000>=")).FirstOrDefault().Replace("hostWeight2000>=", ""));
+                            if (weightFinal.hostWeight2000 >= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestWeight500>="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestWeight500>=")).FirstOrDefault().Replace("guestWeight500>=", ""));
+                            if (weightFinal.guestWeight500 >= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestWeight1000>="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestWeight1000>=")).FirstOrDefault().Replace("guestWeight1000>=", ""));
+                            if (weightFinal.guestWeight1000 >= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestWeight2000>="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestWeight2000>=")).FirstOrDefault().Replace("guestWeight2000>=", ""));
+                            if (weightFinal.guestWeight2000 >= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (condition2.Any(s => !s.Contains("hostWeight500>=") && s.Contains("hostWeight500>")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("hostWeight500>=") && s.Contains("hostWeight500>")).FirstOrDefault().Replace("hostWeight500>", ""));
+                            if (weightFinal.hostWeight500 > provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("hostWeight1000>=") && s.Contains("hostWeight1000>")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("hostWeight1000>=") && s.Contains("hostWeight1000>")).FirstOrDefault().Replace("hostWeight1000>", ""));
+                            if (weightFinal.hostWeight1000 > provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("hostWeight2000>=") && s.Contains("hostWeight2000>")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("hostWeight2000>=") && s.Contains("hostWeight2000>")).FirstOrDefault().Replace("hostWeight2000>", ""));
+                            if (weightFinal.hostWeight2000 > provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("guestWeight500>=") && s.Contains("guestWeight500>")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("guestWeight500>=") && s.Contains("guestWeight500>")).FirstOrDefault().Replace("guestWeight500>", ""));
+                            if (weightFinal.guestWeight500 > provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("guestWeight1000>=") && s.Contains("guestWeight1000>")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("guestWeight1000>=") && s.Contains("guestWeight1000>")).FirstOrDefault().Replace("guestWeight1000>", ""));
+                            if (weightFinal.guestWeight1000 > provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("guestWeight2000>=") && s.Contains("guestWeight2000>")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("guestWeight2000>=") && s.Contains("guestWeight2000>")).FirstOrDefault().Replace("guestWeight2000>", ""));
+                            if (weightFinal.guestWeight2000 > provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (condition2str.Contains("hostWeight500<="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostWeight500<=")).FirstOrDefault().Replace("hostWeight500<=", ""));
+                            if (weightFinal.hostWeight500 <= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostWeight1000<="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostWeight1000<=")).FirstOrDefault().Replace("hostWeight1000<=", ""));
+                            if (weightFinal.hostWeight1000 <= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostWeight2000<="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostWeight2000<=")).FirstOrDefault().Replace("hostWeight2000<=", ""));
+                            if (weightFinal.hostWeight2000 <= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestWeight500<="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestWeight500<=")).FirstOrDefault().Replace("guestWeight500<=", ""));
+                            if (weightFinal.guestWeight500 <= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestWeight1000<="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestWeight1000<=")).FirstOrDefault().Replace("guestWeight1000<=", ""));
+                            if (weightFinal.guestWeight1000 <= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestWeight2000<="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestWeight2000<=")).FirstOrDefault().Replace("guestWeight2000<=", ""));
+                            if (weightFinal.guestWeight2000 <= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (condition2.Any(s => !s.Contains("hostWeight500<=") && s.Contains("hostWeight500<")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("hostWeight500<=") && s.Contains("hostWeight500<")).FirstOrDefault().Replace("hostWeight500<", ""));
+                            if (weightFinal.hostWeight500 < provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("hostWeight1000<=") && s.Contains("hostWeight1000<")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("hostWeight1000<=") && s.Contains("hostWeight1000<")).FirstOrDefault().Replace("hostWeight1000<", ""));
+                            if (weightFinal.hostWeight1000 < provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("hostWeight2000<=") && s.Contains("hostWeight2000<")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("hostWeight2000<=") && s.Contains("hostWeight2000<")).FirstOrDefault().Replace("hostWeight2000<", ""));
+                            if (weightFinal.hostWeight2000 < provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("guestWeight500<=") && s.Contains("guestWeight500<")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("guestWeight500<=") && s.Contains("guestWeight500<")).FirstOrDefault().Replace("guestWeight500<", ""));
+                            if (weightFinal.guestWeight500 < provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("guestWeight1000<=") && s.Contains("guestWeight1000<")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("guestWeight1000<=") && s.Contains("guestWeight1000<")).FirstOrDefault().Replace("guestWeight1000<", ""));
+                            if (weightFinal.guestWeight1000 < provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("guestWeight2000<=") && s.Contains("guestWeight2000<")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("guestWeight2000<=") && s.Contains("guestWeight2000<")).FirstOrDefault().Replace("guestWeight2000<", ""));
+                            if (weightFinal.guestWeight2000 < provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (condition2str.Contains("hostWeight500="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostWeight500=")).FirstOrDefault().Replace("hostWeight500=", ""));
+                            if (weightFinal.hostWeight500 == provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostWeight1000="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostWeight1000=")).FirstOrDefault().Replace("hostWeight1000=", ""));
+                            if (weightFinal.hostWeight1000 == provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostWeight2000="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostWeight2000=")).FirstOrDefault().Replace("hostWeight2000=", ""));
+                            if (weightFinal.hostWeight2000 == provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestWeight500="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestWeight500=")).FirstOrDefault().Replace("guestWeight500=", ""));
+                            if (weightFinal.guestWeight500 == provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestWeight1000="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestWeight1000=")).FirstOrDefault().Replace("guestWeight1000=", ""));
+                            if (weightFinal.guestWeight1000 == provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestWeight2000="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestWeight2000=")).FirstOrDefault().Replace("guestWeight2000=", ""));
+                            if (weightFinal.guestWeight2000 == provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (condition2str.Contains("hostWeight500!="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostWeight500!=")).FirstOrDefault().Replace("hostWeight500!=", ""));
+                            if (weightFinal.hostWeight500 != provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostWeight1000!="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostWeight1000!=")).FirstOrDefault().Replace("hostWeight1000!=", ""));
+                            if (weightFinal.hostWeight1000 != provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostWeight2000!="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostWeight2000!=")).FirstOrDefault().Replace("hostWeight2000!=", ""));
+                            if (weightFinal.hostWeight2000 != provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestWeight500!="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestWeight500!=")).FirstOrDefault().Replace("guestWeight500!=", ""));
+                            if (weightFinal.guestWeight500 != provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestWeight1000!="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestWeight1000!=")).FirstOrDefault().Replace("guestWeight1000!=", ""));
+                            if (weightFinal.guestWeight1000 != provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestWeight2000!="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestWeight2000!=")).FirstOrDefault().Replace("guestWeight2000!=", ""));
+                            if (weightFinal.guestWeight2000 != provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        #endregion
+
+                        #region AM
+                        if (condition2str.Contains("hostAMWeight500>="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostAMWeight500>=")).FirstOrDefault().Replace("hostAMWeight500>=", ""));
+                            if (weightFinal.hostAMWeight500 >= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostAMWeight1000>="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostAMWeight1000>=")).FirstOrDefault().Replace("hostAMWeight1000>=", ""));
+                            if (weightFinal.hostAMWeight1000 >= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostAMWeight2000>="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostAMWeight2000>=")).FirstOrDefault().Replace("hostAMWeight2000>=", ""));
+                            if (weightFinal.hostAMWeight2000 >= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestAMWeight500>="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestAMWeight500>=")).FirstOrDefault().Replace("guestAMWeight500>=", ""));
+                            if (weightFinal.guestAMWeight500 >= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestAMWeight1000>="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestAMWeight1000>=")).FirstOrDefault().Replace("guestAMWeight1000>=", ""));
+                            if (weightFinal.guestAMWeight1000 >= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestAMWeight2000>="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestAMWeight2000>=")).FirstOrDefault().Replace("guestAMWeight2000>=", ""));
+                            if (weightFinal.guestAMWeight2000 >= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (condition2.Any(s => !s.Contains("hostAMWeight500>=") && s.Contains("hostAMWeight500>")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("hostAMWeight500>=") && s.Contains("hostAMWeight500>")).FirstOrDefault().Replace("hostAMWeight500>", ""));
+                            if (weightFinal.hostAMWeight500 > provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("hostAMWeight1000>=") && s.Contains("hostAMWeight1000>")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("hostAMWeight1000>=") && s.Contains("hostAMWeight1000>")).FirstOrDefault().Replace("hostAMWeight1000>", ""));
+                            if (weightFinal.hostAMWeight1000 > provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("hostAMWeight2000>=") && s.Contains("hostAMWeight2000>")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("hostAMWeight2000>=") && s.Contains("hostAMWeight2000>")).FirstOrDefault().Replace("hostAMWeight2000>", ""));
+                            if (weightFinal.hostAMWeight2000 > provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("guestAMWeight500>=") && s.Contains("guestAMWeight500>")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("guestAMWeight500>=") && s.Contains("guestAMWeight500>")).FirstOrDefault().Replace("guestAMWeight500>", ""));
+                            if (weightFinal.guestAMWeight500 > provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("guestAMWeight1000>=") && s.Contains("guestAMWeight1000>")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("guestAMWeight1000>=") && s.Contains("guestAMWeight1000>")).FirstOrDefault().Replace("guestAMWeight1000>", ""));
+                            if (weightFinal.guestAMWeight1000 > provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("guestAMWeight2000>=") && s.Contains("guestAMWeight2000>")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("guestAMWeight2000>=") && s.Contains("guestAMWeight2000>")).FirstOrDefault().Replace("guestAMWeight2000>", ""));
+                            if (weightFinal.guestAMWeight2000 > provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (condition2str.Contains("hostAMWeight500<="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostAMWeight500<=")).FirstOrDefault().Replace("hostAMWeight500<=", ""));
+                            if (weightFinal.hostAMWeight500 <= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostAMWeight1000<="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostAMWeight1000<=")).FirstOrDefault().Replace("hostAMWeight1000<=", ""));
+                            if (weightFinal.hostAMWeight1000 <= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostAMWeight2000<="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostAMWeight2000<=")).FirstOrDefault().Replace("hostAMWeight2000<=", ""));
+                            if (weightFinal.hostAMWeight2000 <= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestAMWeight500<="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestAMWeight500<=")).FirstOrDefault().Replace("guestAMWeight500<=", ""));
+                            if (weightFinal.guestAMWeight500 <= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestAMWeight1000<="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestAMWeight1000<=")).FirstOrDefault().Replace("guestAMWeight1000<=", ""));
+                            if (weightFinal.guestAMWeight1000 <= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestAMWeight2000<="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestAMWeight2000<=")).FirstOrDefault().Replace("guestAMWeight2000<=", ""));
+                            if (weightFinal.guestAMWeight2000 <= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (condition2.Any(s => !s.Contains("hostAMWeight500<=") && s.Contains("hostAMWeight500<")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("hostAMWeight500<=") && s.Contains("hostAMWeight500<")).FirstOrDefault().Replace("hostAMWeight500<", ""));
+                            if (weightFinal.hostAMWeight500 < provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("hostAMWeight1000<=") && s.Contains("hostAMWeight1000<")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("hostAMWeight1000<=") && s.Contains("hostAMWeight1000<")).FirstOrDefault().Replace("hostAMWeight1000<", ""));
+                            if (weightFinal.hostAMWeight1000 < provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("hostAMWeight2000<=") && s.Contains("hostAMWeight2000<")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("hostAMWeight2000<=") && s.Contains("hostAMWeight2000<")).FirstOrDefault().Replace("hostAMWeight2000<", ""));
+                            if (weightFinal.hostAMWeight2000 < provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("guestAMWeight500<=") && s.Contains("guestAMWeight500<")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("guestAMWeight500<=") && s.Contains("guestAMWeight500<")).FirstOrDefault().Replace("guestAMWeight500<", ""));
+                            if (weightFinal.guestAMWeight500 < provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("guestAMWeight1000<=") && s.Contains("guestAMWeight1000<")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("guestAMWeight1000<=") && s.Contains("guestAMWeight1000<")).FirstOrDefault().Replace("guestAMWeight1000<", ""));
+                            if (weightFinal.guestAMWeight1000 < provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("guestAMWeight2000<=") && s.Contains("guestAMWeight2000<")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("guestAMWeight2000<=") && s.Contains("guestAMWeight2000<")).FirstOrDefault().Replace("guestAMWeight2000<", ""));
+                            if (weightFinal.guestAMWeight2000 < provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (condition2str.Contains("hostAMWeight500="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostAMWeight500=")).FirstOrDefault().Replace("hostAMWeight500=", ""));
+                            if (weightFinal.hostAMWeight500 == provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostAMWeight1000="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostAMWeight1000=")).FirstOrDefault().Replace("hostAMWeight1000=", ""));
+                            if (weightFinal.hostAMWeight1000 == provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostAMWeight2000="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostAMWeight2000=")).FirstOrDefault().Replace("hostAMWeight2000=", ""));
+                            if (weightFinal.hostAMWeight2000 == provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestAMWeight500="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestAMWeight500=")).FirstOrDefault().Replace("guestAMWeight500=", ""));
+                            if (weightFinal.guestAMWeight500 == provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestAMWeight1000="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestAMWeight1000=")).FirstOrDefault().Replace("guestAMWeight1000=", ""));
+                            if (weightFinal.guestAMWeight1000 == provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestAMWeight2000="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestAMWeight2000=")).FirstOrDefault().Replace("guestAMWeight2000=", ""));
+                            if (weightFinal.guestAMWeight2000 == provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (condition2str.Contains("hostAMWeight500!="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostAMWeight500!=")).FirstOrDefault().Replace("hostAMWeight500!=", ""));
+                            if (weightFinal.hostAMWeight500 != provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostAMWeight1000!="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostAMWeight1000!=")).FirstOrDefault().Replace("hostAMWeight1000!=", ""));
+                            if (weightFinal.hostAMWeight1000 != provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostAMWeight2000!="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostAMWeight2000!=")).FirstOrDefault().Replace("hostAMWeight2000!=", ""));
+                            if (weightFinal.hostAMWeight2000 != provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestAMWeight500!="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestAMWeight500!=")).FirstOrDefault().Replace("guestAMWeight500!=", ""));
+                            if (weightFinal.guestAMWeight500 != provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestAMWeight1000!="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestAMWeight1000!=")).FirstOrDefault().Replace("guestAMWeight1000!=", ""));
+                            if (weightFinal.guestAMWeight1000 != provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestAMWeight2000!="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestAMWeight2000!=")).FirstOrDefault().Replace("guestAMWeight2000!=", ""));
+                            if (weightFinal.guestAMWeight2000 != provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        #endregion
+
+                        #region Bwin
+                        if (condition2str.Contains("hostBwinWeight500>="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostBwinWeight500>=")).FirstOrDefault().Replace("hostBwinWeight500>=", ""));
+                            if (weightFinal.hostBwinWeight500 >= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostBwinWeight1000>="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostBwinWeight1000>=")).FirstOrDefault().Replace("hostBwinWeight1000>=", ""));
+                            if (weightFinal.hostBwinWeight1000 >= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostBwinWeight2000>="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostBwinWeight2000>=")).FirstOrDefault().Replace("hostBwinWeight2000>=", ""));
+                            if (weightFinal.hostBwinWeight2000 >= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestBwinWeight500>="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestBwinWeight500>=")).FirstOrDefault().Replace("guestBwinWeight500>=", ""));
+                            if (weightFinal.guestBwinWeight500 >= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestBwinWeight1000>="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestBwinWeight1000>=")).FirstOrDefault().Replace("guestBwinWeight1000>=", ""));
+                            if (weightFinal.guestBwinWeight1000 >= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestBwinWeight2000>="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestBwinWeight2000>=")).FirstOrDefault().Replace("guestBwinWeight2000>=", ""));
+                            if (weightFinal.guestBwinWeight2000 >= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (condition2.Any(s => !s.Contains("hostBwinWeight500>=") && s.Contains("hostBwinWeight500>")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("hostBwinWeight500>=") && s.Contains("hostBwinWeight500>")).FirstOrDefault().Replace("hostBwinWeight500>", ""));
+                            if (weightFinal.hostBwinWeight500 > provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("hostBwinWeight1000>=") && s.Contains("hostBwinWeight1000>")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("hostBwinWeight1000>=") && s.Contains("hostBwinWeight1000>")).FirstOrDefault().Replace("hostBwinWeight1000>", ""));
+                            if (weightFinal.hostBwinWeight1000 > provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("hostBwinWeight2000>=") && s.Contains("hostBwinWeight2000>")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("hostBwinWeight2000>=") && s.Contains("hostBwinWeight2000>")).FirstOrDefault().Replace("hostBwinWeight2000>", ""));
+                            if (weightFinal.hostBwinWeight2000 > provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("guestBwinWeight500>=") && s.Contains("guestBwinWeight500>")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("guestBwinWeight500>=") && s.Contains("guestBwinWeight500>")).FirstOrDefault().Replace("guestBwinWeight500>", ""));
+                            if (weightFinal.guestBwinWeight500 > provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("guestBwinWeight1000>=") && s.Contains("guestBwinWeight1000>")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("guestBwinWeight1000>=") && s.Contains("guestBwinWeight1000>")).FirstOrDefault().Replace("guestBwinWeight1000>", ""));
+                            if (weightFinal.guestBwinWeight1000 > provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("guestBwinWeight2000>=") && s.Contains("guestBwinWeight2000>")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("guestBwinWeight2000>=") && s.Contains("guestBwinWeight2000>")).FirstOrDefault().Replace("guestBwinWeight2000>", ""));
+                            if (weightFinal.guestBwinWeight2000 > provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (condition2str.Contains("hostBwinWeight500<="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostBwinWeight500<=")).FirstOrDefault().Replace("hostBwinWeight500<=", ""));
+                            if (weightFinal.hostBwinWeight500 <= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostBwinWeight1000<="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostBwinWeight1000<=")).FirstOrDefault().Replace("hostBwinWeight1000<=", ""));
+                            if (weightFinal.hostBwinWeight1000 <= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostBwinWeight2000<="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostBwinWeight2000<=")).FirstOrDefault().Replace("hostBwinWeight2000<=", ""));
+                            if (weightFinal.hostBwinWeight2000 <= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestBwinWeight500<="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestBwinWeight500<=")).FirstOrDefault().Replace("guestBwinWeight500<=", ""));
+                            if (weightFinal.guestBwinWeight500 <= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestBwinWeight1000<="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestBwinWeight1000<=")).FirstOrDefault().Replace("guestBwinWeight1000<=", ""));
+                            if (weightFinal.guestBwinWeight1000 <= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestBwinWeight2000<="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestBwinWeight2000<=")).FirstOrDefault().Replace("guestBwinWeight2000<=", ""));
+                            if (weightFinal.guestBwinWeight2000 <= provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (condition2.Any(s => !s.Contains("hostBwinWeight500<=") && s.Contains("hostBwinWeight500<")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("hostBwinWeight500<=") && s.Contains("hostBwinWeight500<")).FirstOrDefault().Replace("hostBwinWeight500<", ""));
+                            if (weightFinal.hostBwinWeight500 < provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("hostBwinWeight1000<=") && s.Contains("hostBwinWeight1000<")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("hostBwinWeight1000<=") && s.Contains("hostBwinWeight1000<")).FirstOrDefault().Replace("hostBwinWeight1000<", ""));
+                            if (weightFinal.hostBwinWeight1000 < provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("hostBwinWeight2000<=") && s.Contains("hostBwinWeight2000<")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("hostBwinWeight2000<=") && s.Contains("hostBwinWeight2000<")).FirstOrDefault().Replace("hostBwinWeight2000<", ""));
+                            if (weightFinal.hostBwinWeight2000 < provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("guestBwinWeight500<=") && s.Contains("guestBwinWeight500<")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("guestBwinWeight500<=") && s.Contains("guestBwinWeight500<")).FirstOrDefault().Replace("guestBwinWeight500<", ""));
+                            if (weightFinal.guestBwinWeight500 < provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("guestBwinWeight1000<=") && s.Contains("guestBwinWeight1000<")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("guestBwinWeight1000<=") && s.Contains("guestBwinWeight1000<")).FirstOrDefault().Replace("guestBwinWeight1000<", ""));
+                            if (weightFinal.guestBwinWeight1000 < provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2.Any(s => !s.Contains("guestBwinWeight2000<=") && s.Contains("guestBwinWeight2000<")))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => !s.Contains("guestBwinWeight2000<=") && s.Contains("guestBwinWeight2000<")).FirstOrDefault().Replace("guestBwinWeight2000<", ""));
+                            if (weightFinal.guestBwinWeight2000 < provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (condition2str.Contains("hostBwinWeight500="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostBwinWeight500=")).FirstOrDefault().Replace("hostBwinWeight500=", ""));
+                            if (weightFinal.hostBwinWeight500 == provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostBwinWeight1000="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostBwinWeight1000=")).FirstOrDefault().Replace("hostBwinWeight1000=", ""));
+                            if (weightFinal.hostBwinWeight1000 == provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostBwinWeight2000="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostBwinWeight2000=")).FirstOrDefault().Replace("hostBwinWeight2000=", ""));
+                            if (weightFinal.hostBwinWeight2000 == provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestBwinWeight500="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestBwinWeight500=")).FirstOrDefault().Replace("guestBwinWeight500=", ""));
+                            if (weightFinal.guestBwinWeight500 == provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestBwinWeight1000="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestBwinWeight1000=")).FirstOrDefault().Replace("guestBwinWeight1000=", ""));
+                            if (weightFinal.guestBwinWeight1000 == provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestBwinWeight2000="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestBwinWeight2000=")).FirstOrDefault().Replace("guestBwinWeight2000=", ""));
+                            if (weightFinal.guestBwinWeight2000 == provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        if (condition2str.Contains("hostBwinWeight500!="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostBwinWeight500!=")).FirstOrDefault().Replace("hostBwinWeight500!=", ""));
+                            if (weightFinal.hostBwinWeight500 != provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostBwinWeight1000!="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostBwinWeight1000!=")).FirstOrDefault().Replace("hostBwinWeight1000!=", ""));
+                            if (weightFinal.hostBwinWeight1000 != provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("hostBwinWeight2000!="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("hostBwinWeight2000!=")).FirstOrDefault().Replace("hostBwinWeight2000!=", ""));
+                            if (weightFinal.hostBwinWeight2000 != provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestBwinWeight500!="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestBwinWeight500!=")).FirstOrDefault().Replace("guestBwinWeight500!=", ""));
+                            if (weightFinal.guestBwinWeight500 != provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestBwinWeight1000!="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestBwinWeight1000!=")).FirstOrDefault().Replace("guestBwinWeight1000!=", ""));
+                            if (weightFinal.guestBwinWeight1000 != provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+                        if (condition2str.Contains("guestBwinWeight2000!="))
+                        {
+                            double provalue = double.Parse(condition2.Where(s => s.Contains("guestBwinWeight2000!=")).FirstOrDefault().Replace("guestBwinWeight2000!=", ""));
+                            if (weightFinal.guestBwinWeight2000 != provalue)
+                            {
+                                condition2PP.Add(1);
+                            }
+                        }
+
+                        #endregion
+
+                        #region Eurobet
+                        if (condition2.Any(a => a.Trim().Equals("hostEurobetWeight500>=0")) && weightFinal.hostEurobetWeight500 >= 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("hostEurobetWeight1000>=0")) && weightFinal.hostEurobetWeight1000 >= 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("hostEurobetWeight2000>=0")) && weightFinal.hostEurobetWeight2000 >= 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("guestEurobetWeight500>=0")) && weightFinal.guestEurobetWeight500 >= 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("guestEurobetWeight1000>=0")) && weightFinal.guestEurobetWeight1000 >= 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("guestEurobetWeight2000>=0")) && weightFinal.guestEurobetWeight2000 >= 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+
+                        if (condition2.Any(a => a.Trim().Equals("hostEurobetWeight500>0")) && weightFinal.hostEurobetWeight500 > 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("hostEurobetWeight1000>0")) && weightFinal.hostEurobetWeight1000 > 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("hostEurobetWeight2000>0")) && weightFinal.hostEurobetWeight2000 > 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("guestEurobetWeight500>0")) && weightFinal.guestEurobetWeight500 > 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("guestEurobetWeight1000>0")) && weightFinal.guestEurobetWeight1000 > 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("guestEurobetWeight2000>0")) && weightFinal.guestEurobetWeight2000 > 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+
+                        if (condition2.Any(a => a.Trim().Equals("hostEurobetWeight500<=0")) && weightFinal.hostEurobetWeight500 <= 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("hostEurobetWeight1000<=0")) && weightFinal.hostEurobetWeight1000 <= 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("hostEurobetWeight2000<=0")) && weightFinal.hostEurobetWeight2000 <= 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("guestEurobetWeight500<=0")) && weightFinal.guestEurobetWeight500 <= 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("guestEurobetWeight1000<=0")) && weightFinal.guestEurobetWeight1000 <= 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("guestEurobetWeight2000<=0")) && weightFinal.guestEurobetWeight2000 <= 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+
+                        if (condition2.Any(a => a.Trim().Equals("hostEurobetWeight500<0")) && weightFinal.hostEurobetWeight500 < 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("hostEurobetWeight1000<0")) && weightFinal.hostEurobetWeight1000 < 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("hostEurobetWeight2000<0")) && weightFinal.hostEurobetWeight2000 < 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("guestEurobetWeight500<0")) && weightFinal.guestEurobetWeight500 < 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("guestEurobetWeight1000<0")) && weightFinal.guestEurobetWeight1000 < 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("guestEurobetWeight2000<0")) && weightFinal.guestEurobetWeight2000 < 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+
+                        if (condition2.Any(a => a.Trim().Equals("hostEurobetWeight500=0")) && weightFinal.hostEurobetWeight500 == 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("hostEurobetWeight1000=0")) && weightFinal.hostEurobetWeight1000 == 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("hostEurobetWeight2000=0")) && weightFinal.hostEurobetWeight2000 == 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("guestEurobetWeight500=0")) && weightFinal.guestEurobetWeight500 == 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("guestEurobetWeight1000=0")) && weightFinal.guestEurobetWeight1000 == 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("guestEurobetWeight2000=0")) && weightFinal.guestEurobetWeight2000 == 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+
+                        if (condition2.Any(a => a.Trim().Equals("hostEurobetWeight500!=0")) && weightFinal.hostEurobetWeight500 != 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("hostEurobetWeight1000!=0")) && weightFinal.hostEurobetWeight1000 != 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("hostEurobetWeight2000!=0")) && weightFinal.hostEurobetWeight2000 != 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("guestEurobetWeight500!=0")) && weightFinal.guestEurobetWeight500 != 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("guestEurobetWeight1000!=0")) && weightFinal.guestEurobetWeight1000 != 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        if (condition2.Any(a => a.Trim().Equals("guestEurobetWeight2000!=0")) && weightFinal.guestEurobetWeight2000 != 0)
+                        {
+                            condition2PP.Add(1);
+                        }
+                        #endregion
+                    }
+
+                    if (condition2.Count == condition2PP.Count + 1)
+                    {
+                        if (!string.IsNullOrEmpty(item.HostResult))
+                        {
+                            weightFinal.YCResult = weightFinal.YCResult + item.id + ":" + item.HostResult;
+
+                            if (!string.IsNullOrEmpty(hostResult))
+                            {
+                                if (item.HostResult.Contains(hostResult.ToUpper()))
+                                {
+                                    item.HostYCWin = item.HostYCWin + 1;
+                                }
+                                else
+                                {
+                                    item.HostYCPing = item.HostYCPing + 1;
+                                }
+                                item.HostTotal = item.HostTotal + 1;
+                            }
+                        }
+
+                        if (!string.IsNullOrEmpty(item.GuestResult))
+                        {
+                            weightFinal.YGPResult = weightFinal.YGPResult + item.id + ":" + item.GuestResult;
+
+                            if (!string.IsNullOrEmpty(guestResult))
+                            {
+                                if (item.GuestResult.Contains(guestResult.ToUpper()))
+                                {
+                                    item.GuestYCWin = item.GuestYCWin + 1;
+                                }
+                                else
+                                {
+                                    item.GuestYCPing = item.GuestYCPing + 1;
+                                }
+                                item.GuestTotal = item.GuestTotal + 1;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+}
